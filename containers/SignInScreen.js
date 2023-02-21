@@ -71,7 +71,7 @@ export default function SignInScreen({ setToken }) {
             placeholder="email"
             onChangeText={(input) => {
               setEmail(input);
-              console.log(input);
+              // console.log(input);
             }}
           />
           {/* <Text>Password: </Text> */}
@@ -82,7 +82,7 @@ export default function SignInScreen({ setToken }) {
             secureTextEntry={true}
             onChangeText={(input) => {
               setPassword(input);
-              console.log(input);
+              // console.log(input);
             }}
           />
         </View>

@@ -89,7 +89,7 @@ export default function SignUpScreen({ setToken }) {
             placeholder="username"
             onChangeText={(input) => {
               setUsername(input);
-              console.log(input);
+              // console.log(input);
             }}
           />
 
@@ -99,7 +99,7 @@ export default function SignUpScreen({ setToken }) {
             placeholder="email"
             onChangeText={(input) => {
               setEmail(input);
-              console.log(input);
+              // console.log(input);
             }}
           />
           <TextInput
@@ -110,7 +110,7 @@ export default function SignUpScreen({ setToken }) {
             placeholder="Describes yourself in a few words..."
             onChangeText={(input) => {
               setDescription(input);
-              console.log(input);
+              // console.log(input);
             }}
           />
 
@@ -122,7 +122,7 @@ export default function SignUpScreen({ setToken }) {
             secureTextEntry={true}
             onChangeText={(input) => {
               setPassword(input);
-              console.log(input);
+              // console.log(input);
             }}
           />
           {/* confirm password */}
@@ -133,7 +133,7 @@ export default function SignUpScreen({ setToken }) {
             secureTextEntry={true}
             onChangeText={(input) => {
               setPasswordConf(input);
-              console.log(input);
+              // console.log(input);
             }}
           />
         </View>
