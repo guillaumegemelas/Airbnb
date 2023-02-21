@@ -14,8 +14,32 @@ import logo from "../assets/logo.png";
 export default function SignInScreen({ setToken }) {
   const navigation = useNavigation();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/user/log_in",
+        {
+          email: email,
+          password: password,
+        }
+      );
+      console.log(response.data);
+      //si retour API avec token, on stocke token
+      if (response.token) {
+        setToken(response.token);
+        //sinon nav vers page SignUp
+      } else navigation.navigate("SignUp");
+      //cas d'erreurs
+    } catch (error) {
+      if (error.response.error === "Unauthorized") {
+        setErrorMessage("Email ou mot de passe incorrect");
+      }
+    }
+  };
 
   return (
     <View>
@@ -38,12 +62,23 @@ export default function SignInScreen({ setToken }) {
 
         <View style={styles.form}>
           {/* <Text>email </Text> */}
-          <TextInput style={styles.formtxt} placeholder="email" />
+          <TextInput
+            style={styles.formtxt}
+            placeholder="email"
+            onChangeText={(input) => {
+              setEmail(input);
+              console.log(input);
+            }}
+          />
           {/* <Text>Password: </Text> */}
           <TextInput
             style={styles.formtxt}
             placeholder="password"
             secureTextEntry={true}
+            onChangeText={(input) => {
+              setPassword(input);
+              console.log(input);
+            }}
           />
         </View>
 
@@ -51,7 +86,9 @@ export default function SignInScreen({ setToken }) {
           <TouchableOpacity
             style={styles.login}
             title="Sign in"
-            onPress={async () => {
+            onPress={async (event) => {
+              event.preventDefault();
+              handleLogin();
               const userToken = "secret-token";
               setToken(userToken);
             }}
@@ -62,6 +99,7 @@ export default function SignInScreen({ setToken }) {
               Sign in
             </Text>
           </TouchableOpacity>
+          {errorMessage && <Text>{errorMessage}</Text>}
 
           <TouchableOpacity
             onPress={() => {
