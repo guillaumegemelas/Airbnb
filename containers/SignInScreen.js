@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
+import { useState } from "react";
 import {
-  Button,
+  // Button,
   Text,
   TextInput,
   View,
@@ -12,6 +13,10 @@ import logo from "../assets/logo.png";
 
 export default function SignInScreen({ setToken }) {
   const navigation = useNavigation();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <View>
       <View>
@@ -63,7 +68,11 @@ export default function SignInScreen({ setToken }) {
               navigation.navigate("SignUp");
             }}
           >
-            <Text>Create an account</Text>
+            <Text
+              style={{ fontSize: 13, color: "#717171", fontWeight: "bold" }}
+            >
+              No account? Register
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -73,9 +82,7 @@ export default function SignInScreen({ setToken }) {
 
 const styles = StyleSheet.create({
   logo: {
-    height: 100,
-    marginBottom: 30,
-    marginTop: 55,
+    height: "30%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -85,22 +92,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   form: {
-    height: 120,
-    marginTop: 50,
-    marginBottom: 50,
-    justifyContent: "space-around",
+    height: "40%",
+    justifyContent: "center",
     alignItems: "center",
   },
   formtxt: {
     width: "82%",
     height: 40,
+    marginBottom: 40,
     borderBottomColor: "rgb(235, 90, 98)",
     borderBottomWidth: 2,
   },
   loginbutton: {
-    height: 120,
-    marginTop: 50,
-    marginBottom: 50,
+    height: "30%",
+
     justifyContent: "space-around",
     alignItems: "center",
   },
