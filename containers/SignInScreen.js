@@ -9,6 +9,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import axios from "axios";
 import logo from "../assets/logo.png";
 
 export default function SignInScreen({ setToken }) {
@@ -29,13 +30,15 @@ export default function SignInScreen({ setToken }) {
       );
       console.log(response.data);
       //si retour API avec token, on stocke token
-      if (response.token) {
-        setToken(response.token);
+      if (response.data.token) {
+        setToken(response.data.token);
+        alert("Connection réussie");
         //sinon nav vers page SignUp
       } else navigation.navigate("SignUp");
       //cas d'erreurs
     } catch (error) {
-      if (error.response.error === "Unauthorized") {
+      console.log(error.response);
+      if (error.response.data.error === "Unauthorized") {
         setErrorMessage("Email ou mot de passe incorrect");
       }
     }
@@ -56,13 +59,14 @@ export default function SignInScreen({ setToken }) {
             }}
           />
           <View>
-            <Text style={styles.txtlogo}>Sign up</Text>
+            <Text style={styles.txtlogo}>Sign in</Text>
           </View>
         </View>
 
         <View style={styles.form}>
           {/* <Text>email </Text> */}
           <TextInput
+            value={email}
             style={styles.formtxt}
             placeholder="email"
             onChangeText={(input) => {
@@ -72,6 +76,7 @@ export default function SignInScreen({ setToken }) {
           />
           {/* <Text>Password: </Text> */}
           <TextInput
+            value={password}
             style={styles.formtxt}
             placeholder="password"
             secureTextEntry={true}
@@ -86,11 +91,8 @@ export default function SignInScreen({ setToken }) {
           <TouchableOpacity
             style={styles.login}
             title="Sign in"
-            onPress={async (event) => {
-              event.preventDefault();
+            onPress={async () => {
               handleLogin();
-              const userToken = "secret-token";
-              setToken(userToken);
             }}
           >
             <Text
@@ -99,13 +101,15 @@ export default function SignInScreen({ setToken }) {
               Sign in
             </Text>
           </TouchableOpacity>
-          {errorMessage && <Text>{errorMessage}</Text>}
 
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("SignUp");
             }}
           >
+            {errorMessage && (
+              <Text style={{ color: "red" }}>{errorMessage}</Text>
+            )}
             <Text
               style={{ fontSize: 13, color: "#717171", fontWeight: "bold" }}
             >
