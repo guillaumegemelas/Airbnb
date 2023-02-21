@@ -107,15 +107,13 @@ export default function SignInScreen({ setToken }) {
               navigation.navigate("SignUp");
             }}
           >
-            {errorMessage && (
-              <Text style={{ color: "red" }}>{errorMessage}</Text>
-            )}
             <Text
               style={{ fontSize: 13, color: "#717171", fontWeight: "bold" }}
             >
               No account? Register
             </Text>
           </TouchableOpacity>
+          {errorMessage && <Text style={{ color: "red" }}>{errorMessage}</Text>}
         </View>
       </View>
     </View>

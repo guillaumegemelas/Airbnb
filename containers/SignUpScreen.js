@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/core";
 import {
   Button,
   Text,
@@ -12,6 +13,7 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 
 export default function SignUpScreen({ setToken }) {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
@@ -153,18 +155,16 @@ export default function SignUpScreen({ setToken }) {
 
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("SignUp");
+              navigation.navigate("SignIn");
             }}
           >
-            {errorMessage && (
-              <Text style={{ color: "red" }}>{errorMessage}</Text>
-            )}
             <Text
               style={{ fontSize: 13, color: "#717171", fontWeight: "bold" }}
             >
               Already have an account? Sign in
             </Text>
           </TouchableOpacity>
+          {errorMessage && <Text style={{ color: "red" }}>{errorMessage}</Text>}
         </View>
       </View>
     </View>
