@@ -93,7 +93,7 @@ export default function App() {
                           headerTitleStyle: { color: "white" },
                         }}
                       >
-                        {() => <HomeScreen />}
+                        {() => <HomeScreen setToken={setToken} />}
                       </Stack.Screen>
 
                       <Stack.Screen
@@ -141,4 +141,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-

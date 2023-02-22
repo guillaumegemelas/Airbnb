@@ -29,12 +29,18 @@ export default function SignInScreen({ setToken }) {
         }
       );
       console.log(response.data);
-      //si retour API avec token, on stocke token
+
+      //si retour API avec token, on stock le token
       if (response.data.token) {
         setToken(response.data.token);
+
+        //affiche le token en chaine de caractères
+        console.log(response.data.token);
         alert("Connection réussie");
-        //sinon nav vers page SignUp
-      } else navigation.navigate("SignUp");
+      }
+      //sinon nav vers page SignUp
+      // else navigation.navigate("SignUp");
+
       //cas d'erreurs
     } catch (error) {
       console.log(error.response);
