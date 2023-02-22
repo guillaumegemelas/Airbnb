@@ -52,7 +52,7 @@ export default function SignUpScreen({ setToken }) {
       );
       console.log(response.data, "+++++++++++++++++++++++++");
       //si retour API avec token, on stocke token
-      if (response.data.token) {
+      if (response.data) {
         setToken(response.data.token);
         alert("Cotre compte a bien été créé");
       }
@@ -152,7 +152,7 @@ export default function SignUpScreen({ setToken }) {
           <TouchableOpacity
             style={styles.login}
             title="Sign in"
-            onPress={async () => {
+            onPress={() => {
               handleSignUp();
             }}
           >

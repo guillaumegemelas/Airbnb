@@ -36,7 +36,7 @@ export default function SignInScreen({ setToken }) {
         setToken(response.data.token);
 
         //affiche le token en chaine de caractères
-        console.log(response.data.token, "+++++++++++++++++++++++++");
+        console.log(response.data.token, "+++++++++++😀😀++++++++++++++");
         alert("Connection réussie");
       }
       //sinon nav vers page SignUp
@@ -44,7 +44,7 @@ export default function SignInScreen({ setToken }) {
 
       //cas d'erreurs
     } catch (error) {
-      console.log(error.response, "------------------------------");
+      console.log(error.response, "------🫥🫥------------------------");
       if (error.response.data.error === "Unauthorized") {
         setErrorMessage("Email ou mot de passe incorrect");
       }
@@ -98,7 +98,7 @@ export default function SignInScreen({ setToken }) {
           <TouchableOpacity
             style={styles.login}
             title="Sign in"
-            onPress={async () => {
+            onPress={() => {
               handleLogin();
             }}
           >

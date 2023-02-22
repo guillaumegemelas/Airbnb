@@ -90,20 +90,7 @@ export default function App() {
                       <Stack.Screen
                         name="Home"
                         options={{
-                          // header: () => (
-                          //   <Image
-                          //     style={{
-                          //       width: 50,
-                          //       height: 50,
-                          //       justifyContent: "center",
-                          //       alignItems: "center",
-                          //     }}
-                          //     source={require("./assets/logo.png")}
-                          //   ></Image>
-                          // ),
-                          title: "",
-                          // headerStyle: { backgroundColor: "red" },
-                          // headerTitleStyle: { color: "white" },
+                          title: "home",
                         }}
                       >
                         {() => <HomeScreen setToken={setToken} />}
