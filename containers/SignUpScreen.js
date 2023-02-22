@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import axios from "axios";
 import { useState } from "react";
@@ -23,6 +24,23 @@ export default function SignUpScreen({ setToken }) {
 
   const handleSignUp = async () => {
     try {
+      //on vérifie en front:
+      //que les 2 mots de passe soient identiques
+      //que tous les champs soient remplis
+
+      setErrorMessage("");
+
+      if (!email || !username || !password || !passwordConf || !description) {
+        setErrorMessage("Remplir tous les champs");
+        return;
+      }
+
+      if (password !== passwordConf) {
+        setErrorMessage("Merci de saisir 2 mots de passe identiques");
+        return;
+      }
+
+      //puis passage de requete ave axios au back
       const response = await axios.post(
         "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/user/sign_up",
         {
@@ -34,17 +52,12 @@ export default function SignUpScreen({ setToken }) {
       );
       console.log(response.data);
       //si retour API avec token, on stocke token
-
-      if (password !== passwordConf) {
-        setErrorMessage("Merci de saisir 2 mots de passe identiques");
-      } else {
-        if (response.data.token) {
-          setToken(response.data.token);
-          alert("Cotre compte a bien été créé");
-          //sinon nav vers page SignUp
-        } else navigation.navigate("SignIn");
-        //cas d'erreurs
+      if (response.data.token) {
+        setToken(response.data.token);
+        alert("Cotre compte a bien été créé");
       }
+
+      //cas d'erreurs
     } catch (error) {
       console.log(error.response);
       if (error.response.data.error === "This email already has an account.") {
@@ -55,9 +68,6 @@ export default function SignUpScreen({ setToken }) {
         error.response.data.error === "This username already has an account."
       ) {
         setErrorMessage("This username already has an account");
-      }
-      if (error.response.data.error === "Missing parameters") {
-        setErrorMessage("One parameter is missing");
       }
     }
   };
