@@ -32,7 +32,7 @@ export default function HomeScreen({ setToken }) {
         const response = await axios.get(
           "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms"
         );
-        // console.log(response.data);
+        console.log(response.data);
         setData(response.data);
         setIsloading(false);
       } catch (error) {
@@ -58,11 +58,9 @@ export default function HomeScreen({ setToken }) {
             />
           </View>
 
-          {/* Utiliser Flatlist idem map REact pour afficher les éléments de l'objet de la requete */}
-
           <FlatList
             data={Data}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item._id}
             renderItem={({ item }) => {
               // console.log(item);
               return (
@@ -76,11 +74,11 @@ export default function HomeScreen({ setToken }) {
                     >
                       <Image
                         style={{
-                          width: 150,
+                          width: "90%",
                           height: 200,
                           marginBottom: 20,
                         }}
-                        source={item.photos}
+                        source={{ uri: item.photos[0].url }}
                       />
 
                       <Text
@@ -123,7 +121,7 @@ export default function HomeScreen({ setToken }) {
                             borderRadius: 50,
                             marginBottom: 10,
                           }}
-                          source={item.user.account.photo}
+                          source={{ uri: item.user.account.photo.url }}
                         />
                       </View>
                     </View>
