@@ -1,15 +1,15 @@
 import { useNavigation } from "@react-navigation/core";
 import { useRoute } from "@react-navigation/native";
 import {
-  Button,
   Text,
   View,
-  FlatList,
   StyleSheet,
   Image,
   TouchableOpacity,
+  ScrollView,
   ActivityIndicator,
 } from "react-native";
+import ViewMoreText from "react-native-view-more-text";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
@@ -48,7 +48,7 @@ export default function RoomScreeen() {
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <View>
+        <ScrollView style={{ paddingTop: 10 }}>
           <View style={styles.logo}>
             <Image
               source={logo}
@@ -59,16 +59,91 @@ export default function RoomScreeen() {
             />
           </View>
 
-          <FlatList
-            data={Data}
-            keyExtractor={(item) => item._id}
-            renderItem={({ item }) => {
-              return <Text>{item.description}</Text>;
+          <View
+            style={{
+              width: "100%",
             }}
-          />
+          >
+            <Image
+              style={{
+                width: "100%",
+                height: 300,
+                marginBottom: 20,
+              }}
+              source={{ uri: Data.photos[0].url }}
+            />
 
-          <Text>{route.params.id}</Text>
-        </View>
+            <Text
+              style={{
+                position: "absolute",
+                justifyContent: "center",
+                width: 90,
+                height: 50,
+                backgroundColor: "black",
+                fontSize: 20,
+                color: "white",
+                marginTop: 220,
+                padding: 12,
+              }}
+            >
+              {Data.price}€
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              marginLeft: "5%",
+              marginRight: "5%",
+              marginBottom: 30,
+            }}
+          >
+            <View style={{ width: "75%" }}>
+              <Text numberOfLines={1} style={{ fontSize: 20 }}>
+                {Data.title}
+              </Text>
+              <Text>{Data.rate}</Text>
+            </View>
+            <View style={{ width: "25%", marginLeft: 25 }}>
+              <Image
+                style={{
+                  width: 60,
+                  height: 60,
+                  borderRadius: 50,
+                }}
+                source={{ uri: Data.user.account.photo.url }}
+              />
+            </View>
+          </View>
+
+          {/* test pour etirer le text more or less */}
+          <View
+            style={{
+              fontSize: 15,
+              marginLeft: 20,
+              marginRight: 20,
+              marginBottom: 20,
+            }}
+          >
+            <ViewMoreText numberOfLines={3}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  lineHeight: 20,
+                }}
+              >
+                {Data.description}
+              </Text>
+            </ViewMoreText>
+          </View>
+
+          {/* ------------------------------------ */}
+          <View>
+            <Text style={{ color: "red", marginLeft: 30 }}>
+              Ici sera la map!
+            </Text>
+          </View>
+        </ScrollView>
       )}
     </View>
   );
