@@ -93,7 +93,7 @@ export default function App() {
                           title: "home",
                         }}
                       >
-                        {() => <HomeScreen setToken={setToken} />}
+                        {() => <HomeScreen />}
                       </Stack.Screen>
 
                       <Stack.Screen name="Room">

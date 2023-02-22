@@ -33,10 +33,10 @@ export default function RoomScreeen() {
         );
 
         setData(response.data);
-        console.log(response.data, "------------------------");
+        console.log(response.data, "------------Room--ok----------");
         setIsloading(false);
       } catch (error) {
-        console.log(error.response.data, "*************************");
+        console.log(error.response.data, "*********Room**error**************");
         //limité sur cette route à 1 requete par seconde
       }
     };

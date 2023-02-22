@@ -14,17 +14,11 @@ import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 
 // J'AI AJOUTE SETTOKEN DANS HOME PROPS ET DANS APP.JS SUR ROUTE HOME
-export default function HomeScreen({ setToken }) {
+export default function HomeScreen() {
   const navigation = useNavigation();
 
   const [Data, setData] = useState();
   const [isLoading, setIsloading] = useState(true);
-
-  //faire une requete vers: "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms" avex axios mais bien
-  //penser à importer le token de la page login ou sign up
-  // il faut au préalable qu'il soit stocké dans le asynstorage (App.js)
-
-  // puis requete avec useEffect()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,11 +26,14 @@ export default function HomeScreen({ setToken }) {
         const response = await axios.get(
           "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms"
         );
-        console.log(response.data, "---------🎃🎃----------------------");
+        console.log(response.data, "---------HOME--OK--------------------");
         setData(response.data);
         setIsloading(false);
       } catch (error) {
-        console.log(error.response.data, "*********👹👹*********************");
+        console.log(
+          error.response.data,
+          "*********HOME**ERROR*******************"
+        );
       }
     };
     fetchData();
