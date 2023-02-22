@@ -21,6 +21,7 @@ export default function SignInScreen({ setToken }) {
 
   const handleLogin = async () => {
     try {
+      setErrorMessage("");
       const response = await axios.post(
         "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/user/log_in",
         {
@@ -28,14 +29,14 @@ export default function SignInScreen({ setToken }) {
           password: password,
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
 
       //si retour API avec token, on stock le token
       if (response.data.token) {
         setToken(response.data.token);
 
         //affiche le token en chaine de caractères
-        console.log(response.data.token);
+        console.log(response.data.token, "+++++++++++++++++++++++++");
         alert("Connection réussie");
       }
       //sinon nav vers page SignUp
@@ -43,7 +44,7 @@ export default function SignInScreen({ setToken }) {
 
       //cas d'erreurs
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response, "------------------------------");
       if (error.response.data.error === "Unauthorized") {
         setErrorMessage("Email ou mot de passe incorrect");
       }

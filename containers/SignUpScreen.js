@@ -50,7 +50,7 @@ export default function SignUpScreen({ setToken }) {
           password: password,
         }
       );
-      console.log(response.data);
+      console.log(response.data, "+++++++++++++++++++++++++");
       //si retour API avec token, on stocke token
       if (response.data.token) {
         setToken(response.data.token);
@@ -59,7 +59,7 @@ export default function SignUpScreen({ setToken }) {
 
       //cas d'erreurs
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response, "------------------------------");
       if (error.response.data.error === "This email already has an account.") {
         setErrorMessage("This email already has an account");
       }
