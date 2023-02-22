@@ -32,15 +32,15 @@ export default function HomeScreen({ setToken }) {
         const response = await axios.get(
           "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms"
         );
-        // console.log(response.data);
+        console.log(response.data, "-------------------------------");
         setData(response.data);
         setIsloading(false);
       } catch (error) {
-        // console.log(error.response);
+        console.log(error.response, "******************************");
       }
     };
     fetchData();
-  });
+  }, [1]);
 
   return (
     <View>
