@@ -11,6 +11,7 @@ import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 import SplashScreen from "./containers/SplashScreen";
+import { Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -88,9 +89,20 @@ export default function App() {
                       <Stack.Screen
                         name="Home"
                         options={{
-                          title: "My App",
-                          headerStyle: { backgroundColor: "red" },
-                          headerTitleStyle: { color: "white" },
+                          // header: () => (
+                          //   <Image
+                          //     style={{
+                          //       width: 50,
+                          //       height: 50,
+                          //       justifyContent: "center",
+                          //       alignItems: "center",
+                          //     }}
+                          //     source={require("./assets/logo.png")}
+                          //   ></Image>
+                          // ),
+                          title: "",
+                          // headerStyle: { backgroundColor: "red" },
+                          // headerTitleStyle: { color: "white" },
                         }}
                       >
                         {() => <HomeScreen setToken={setToken} />}
