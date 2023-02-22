@@ -32,11 +32,11 @@ export default function HomeScreen({ setToken }) {
         const response = await axios.get(
           "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms"
         );
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setIsloading(false);
       } catch (error) {
-        console.log(error.response);
+        // console.log(error.response);
       }
     };
     fetchData();
@@ -64,7 +64,9 @@ export default function HomeScreen({ setToken }) {
             renderItem={({ item }) => {
               // console.log(item);
               return (
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Room", { id: item._id })}
+                >
                   <View>
                     <View
                       style={{

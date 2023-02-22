@@ -11,6 +11,7 @@ import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 import SplashScreen from "./containers/SplashScreen";
+import RoomScreen from "./containers/RoomScreen";
 import { Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -106,6 +107,10 @@ export default function App() {
                         }}
                       >
                         {() => <HomeScreen setToken={setToken} />}
+                      </Stack.Screen>
+
+                      <Stack.Screen name="Room">
+                        {() => <RoomScreen />}
                       </Stack.Screen>
 
                       <Stack.Screen
