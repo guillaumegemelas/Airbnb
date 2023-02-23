@@ -22,7 +22,7 @@ import logo from "../assets/logo.png";
 import { Entypo } from "@expo/vector-icons";
 
 //-----import pour carroussel-------------------------------
-// import Swiper from "react-native-swiper-flatlist";
+import Swiper from "react-native-swiper-flatlist";
 //----------------------------------------------------
 
 export default function RoomScreeen() {
@@ -97,14 +97,14 @@ export default function RoomScreeen() {
 
           <View>
             {/* test carroussel */}
-            {/* <ScrollView>
+            <ScrollView>
               <Swiper
                 style={{ height: 300, backgroundColor: "red" }}
                 dotColor="salmon"
                 activeDotColor="red"
                 autoplay
               >
-                {Data.photos.map((slide) => {
+                {Data.photos.map((pict) => {
                   return (
                     <View style={{ height: 300 }}>
                       <Image
@@ -112,23 +112,23 @@ export default function RoomScreeen() {
                           width: "100%",
                           height: "100%",
                         }}
-                        source={{ uri: slide.url }}
+                        source={{ uri: pict.url }}
                       />
                     </View>
                   );
                 })}
               </Swiper>
-            </ScrollView> */}
+            </ScrollView>
 
             {/* fin test carroussel */}
-            <Image
+            {/* <Image
               style={{
                 width: "100%",
                 height: 300,
                 marginBottom: 20,
               }}
               source={{ uri: Data.photos[0].url }}
-            />
+            /> */}
 
             <Text
               style={{
