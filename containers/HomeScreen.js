@@ -42,7 +42,7 @@ export default function HomeScreen() {
     fetchData();
   }, []);
 
-  //-------------------
+  //--fonction-pour-générer-étoiles-rating-------------
   const generateStars = (ratingValue) => {
     const starsArray = [];
     for (let i = 0; i < 5; i++) {
@@ -144,8 +144,15 @@ export default function HomeScreen() {
                         >
                           {item.title}
                         </Text>
-                        {/* <Text>{item.ratingValue}</Text> */}
-                        <Text>{generateStars(item.ratingValue)}</Text>
+
+                        <View
+                          style={{ flexDirection: "row", alignItems: "center" }}
+                        >
+                          <Text>{generateStars(item.ratingValue)}</Text>
+                          <Text style={{ marginLeft: 15, color: "lightgray" }}>
+                            {item.reviews} reviews
+                          </Text>
+                        </View>
                       </View>
 
                       <View style={{ width: "25%", marginLeft: 25 }}>

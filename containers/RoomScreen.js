@@ -12,19 +12,36 @@ import {
 import ViewMoreText from "react-native-view-more-text";
 import axios from "axios";
 import { useEffect, useState } from "react";
+//import pour map
+import MapView from "react-native-maps";
+import { Marker } from "react-native-maps";
+//
 import logo from "../assets/logo.png";
+
+// il faut importer les icones Entypo ----------------------
+import { Entypo } from "@expo/vector-icons";
+//--------------------------------------------------------
 
 export default function RoomScreeen() {
   const route = useRoute();
-  //   console.log(route.params.id, "😀😀😄😍🥸");
-
   const id = route.params.id;
-  //   console.log(id, "😡😡🤬");
 
   const [Data, setData] = useState();
   const [isLoading, setIsloading] = useState(true);
 
-  //on fait la requete avec l'id en params: sur Postman fonctionne
+  //---map--------------------------------------
+  const markers = [
+    {
+      id: 1,
+      latitude: 48.8564449,
+      longitude: 2.4002913,
+      title: "Le Reacteur",
+      description: "La formation des champion·ne·s !",
+    },
+  ];
+  //-------------------------------------------
+
+  //on fait la requete avec l'id en params:
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,12 +60,28 @@ export default function RoomScreeen() {
     fetchData();
   }, [id]);
 
+  //--fonction-pour-générer-étoiles-rating-------------
+  const generateStars = (ratingValue) => {
+    const starsArray = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < ratingValue) {
+        starsArray.push(
+          <Entypo name="star" size={24} color="#DAA520" key={i} />
+        );
+      } else {
+        starsArray.push(<Entypo name="star" size={24} color="grey" key={i} />);
+      }
+    }
+    return starsArray;
+  };
+  //-------------------
+
   return (
     <View>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <ScrollView style={{ paddingTop: 10 }}>
+        <ScrollView style={{ marginTop: 15 }}>
           <View style={styles.logo}>
             <Image
               source={logo}
@@ -59,7 +92,7 @@ export default function RoomScreeen() {
             />
           </View>
 
-          <View
+          <ScrollView
             style={{
               width: "100%",
             }}
@@ -88,7 +121,7 @@ export default function RoomScreeen() {
             >
               {Data.price}€
             </Text>
-          </View>
+          </ScrollView>
 
           <View
             style={{
@@ -96,13 +129,19 @@ export default function RoomScreeen() {
               marginLeft: "5%",
               marginRight: "5%",
               marginBottom: 30,
+              marginTop: 20,
             }}
           >
             <View style={{ width: "75%" }}>
               <Text numberOfLines={1} style={{ fontSize: 20 }}>
                 {Data.title}
               </Text>
-              <Text>{Data.rate}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text>{generateStars(Data.ratingValue)}</Text>
+                <Text style={{ marginLeft: 15, color: "lightgray" }}>
+                  {Data.reviews} reviews
+                </Text>
+              </View>
             </View>
             <View style={{ width: "25%", marginLeft: 25 }}>
               <Image
@@ -116,7 +155,7 @@ export default function RoomScreeen() {
             </View>
           </View>
 
-          {/* test pour etirer le text more or less */}
+          {/* test pour etirer le text more or less ---------*/}
           <View
             style={{
               fontSize: 15,
@@ -138,11 +177,36 @@ export default function RoomScreeen() {
           </View>
 
           {/* ------------------------------------ */}
+
+          {/* affichage de la map--------------------- */}
           <View>
-            <Text style={{ color: "red", marginLeft: 30 }}>
-              Ici sera la map!
-            </Text>
+            <MapView
+              style={{ flex: 1, height: 300, width: "100%" }}
+              initialRegion={{
+                latitude: 48.856614,
+                longitude: 2.3522219,
+                latitudeDelta: 0.2,
+                longitudeDelta: 0.2,
+              }}
+              showsUserLocation={true}
+            >
+              {markers.map((marker) => {
+                return (
+                  <Marker
+                    key={marker.id}
+                    coordinate={{
+                      latitude: marker.latitude,
+                      longitude: marker.longitude,
+                    }}
+                    title={marker.title}
+                    description={marker.description}
+                  />
+                );
+              })}
+            </MapView>
           </View>
+
+          {/* Fin affichage de la map----------------- */}
         </ScrollView>
       )}
     </View>
