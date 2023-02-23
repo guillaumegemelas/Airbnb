@@ -121,6 +121,15 @@ export default function RoomScreeen() {
 
             {/* fin test carroussel */}
 
+            {/* <View>
+              <Image
+                style={{
+                  width: 550,
+                  height: 300,
+                }}
+                source={{ uri: Data.photos[0].url }}
+              />
+            </View> */}
             <Text
               style={{
                 position: "absolute",

@@ -12,6 +12,7 @@ import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 import SplashScreen from "./containers/SplashScreen";
 import RoomScreen from "./containers/RoomScreen";
+import AroundmeScreen from "./containers/AroundmeScreen";
 import { Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -76,6 +77,7 @@ export default function App() {
                   tabBarInactiveTintColor: "gray",
                 }}
               >
+                {/* premier Tab Home------------------------- */}
                 <Tab.Screen
                   name="TabHome"
                   options={{
@@ -111,6 +113,36 @@ export default function App() {
                     </Stack.Navigator>
                   )}
                 </Tab.Screen>
+
+                {/* second Tab around me------------------------- */}
+                <Tab.Screen
+                  name="TabAround"
+                  options={{
+                    tabBarLabel: "Around me",
+                    tabBarIcon: ({ color, size }) => (
+                      <Ionicons
+                        name={"location-outline"}
+                        size={size}
+                        color={color}
+                      />
+                    ),
+                  }}
+                >
+                  {() => (
+                    <Stack.Navigator>
+                      <Stack.Screen
+                        name="AroundmeScreen"
+                        options={{
+                          title: "AroundmeScreen",
+                        }}
+                      >
+                        {() => <AroundmeScreen />}
+                      </Stack.Screen>
+                    </Stack.Navigator>
+                  )}
+                </Tab.Screen>
+
+                {/* third Tab setting------------------------- */}
                 <Tab.Screen
                   name="TabSettings"
                   options={{
