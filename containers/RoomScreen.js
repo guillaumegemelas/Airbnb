@@ -20,7 +20,10 @@ import logo from "../assets/logo.png";
 
 // il faut importer les icones Entypo ----------------------
 import { Entypo } from "@expo/vector-icons";
-//--------------------------------------------------------
+
+//-----import pour carroussel-------------------------------
+// import Swiper from "react-native-swiper-flatlist";
+//----------------------------------------------------
 
 export default function RoomScreeen() {
   const route = useRoute();
@@ -92,11 +95,32 @@ export default function RoomScreeen() {
             />
           </View>
 
-          <ScrollView
-            style={{
-              width: "100%",
-            }}
-          >
+          <View>
+            {/* test carroussel */}
+            {/* <ScrollView>
+              <Swiper
+                style={{ height: 300, backgroundColor: "red" }}
+                dotColor="salmon"
+                activeDotColor="red"
+                autoplay
+              >
+                {Data.photos.map((slide) => {
+                  return (
+                    <View style={{ height: 300 }}>
+                      <Image
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                        }}
+                        source={{ uri: slide.url }}
+                      />
+                    </View>
+                  );
+                })}
+              </Swiper>
+            </ScrollView> */}
+
+            {/* fin test carroussel */}
             <Image
               style={{
                 width: "100%",
@@ -121,7 +145,7 @@ export default function RoomScreeen() {
             >
               {Data.price}€
             </Text>
-          </ScrollView>
+          </View>
 
           <View
             style={{
