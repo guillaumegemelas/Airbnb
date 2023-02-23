@@ -70,7 +70,7 @@ export default function HomeScreen() {
           />
         </View>
       ) : (
-        <View>
+        <View style={{ marginTop: 10 }}>
           <View style={styles.logo}>
             <Image
               source={logo}
@@ -187,7 +187,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   logo: {
-    height: "10%",
+    height: "5%",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 15,

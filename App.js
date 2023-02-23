@@ -13,7 +13,9 @@ import SettingsScreen from "./containers/SettingsScreen";
 import SplashScreen from "./containers/SplashScreen";
 import RoomScreen from "./containers/RoomScreen";
 import AroundmeScreen from "./containers/AroundmeScreen";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
+
+import logo from "./assets/logo.png";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -91,8 +93,22 @@ export default function App() {
                     <Stack.Navigator>
                       <Stack.Screen
                         name="Home"
-                        options={{
-                          title: "home",
+                        options={() => {
+                          return {
+                            headerTitle: () => {
+                              <View>
+                                <Image
+                                  source={logo}
+                                  style={{
+                                    width: 25,
+                                    height: 25,
+                                  }}
+                                />
+                                ;
+                              </View>;
+                            },
+                          };
+                          // title: "home",
                         }}
                       >
                         {() => <HomeScreen />}
@@ -133,7 +149,7 @@ export default function App() {
                       <Stack.Screen
                         name="AroundmeScreen"
                         options={{
-                          title: "AroundmeScreen",
+                          title: "Around me",
                         }}
                       >
                         {() => <AroundmeScreen />}
