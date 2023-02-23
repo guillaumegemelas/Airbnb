@@ -13,7 +13,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 
-// J'AI AJOUTE SETTOKEN DANS HOME PROPS ET DANS APP.JS SUR ROUTE HOME
+// il faut importer les icones Entypo ----------------------
+import { Entypo } from "@expo/vector-icons";
+//--------------------------------------------------------
+
 export default function HomeScreen() {
   const navigation = useNavigation();
 
@@ -38,6 +41,22 @@ export default function HomeScreen() {
     };
     fetchData();
   }, []);
+
+  //-------------------
+  const generateStars = (ratingValue) => {
+    const starsArray = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < ratingValue) {
+        starsArray.push(
+          <Entypo name="star" size={24} color="#DAA520" key={i} />
+        );
+      } else {
+        starsArray.push(<Entypo name="star" size={24} color="grey" key={i} />);
+      }
+    }
+    return starsArray;
+  };
+  //-------------------
 
   return (
     <View>
@@ -78,6 +97,7 @@ export default function HomeScreen() {
                         marginLeft: "5%",
                       }}
                     >
+                      {/* on peut utiliser ImageBackground pour mettre texte sur photso */}
                       <Image
                         style={{
                           width: "90%",
@@ -86,22 +106,26 @@ export default function HomeScreen() {
                         }}
                         source={{ uri: item.photos[0].url }}
                       />
-
-                      <Text
+                      <View
                         style={{
                           position: "absolute",
                           justifyContent: "center",
+                          alignItems: "center",
+                          marginTop: 140,
                           width: 90,
                           height: 50,
                           backgroundColor: "black",
-                          fontSize: 25,
-                          color: "white",
-                          marginTop: 140,
-                          padding: 12,
                         }}
                       >
-                        {item.price}€
-                      </Text>
+                        <Text
+                          style={{
+                            fontSize: 25,
+                            color: "white",
+                          }}
+                        >
+                          {item.price}€
+                        </Text>
+                      </View>
                     </View>
                     <View
                       style={{
@@ -114,11 +138,16 @@ export default function HomeScreen() {
                       }}
                     >
                       <View style={{ width: "75%" }}>
-                        <Text numberOfLines={1} style={{ fontSize: 20 }}>
+                        <Text
+                          numberOfLines={1}
+                          style={{ fontSize: 20, marginBottom: 10 }}
+                        >
                           {item.title}
                         </Text>
-                        <Text>{item.rate}</Text>
+                        {/* <Text>{item.ratingValue}</Text> */}
+                        <Text>{generateStars(item.ratingValue)}</Text>
                       </View>
+
                       <View style={{ width: "25%", marginLeft: 25 }}>
                         <Image
                           style={{
