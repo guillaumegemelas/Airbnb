@@ -88,6 +88,8 @@ export default function AroundmeScreen() {
                       latitude: marker.location[1],
                       longitude: marker.location[0],
                     }}
+                    title={marker.title}
+                    description={marker.description}
                     onPress={() =>
                       navigation.navigate("Room", { id: marker._id })
                     }

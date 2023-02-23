@@ -33,6 +33,10 @@ export default function RoomScreeen() {
   const [isLoading, setIsloading] = useState(true);
 
   //---map--------------------------------------
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
   const markers = [
     {
       id: 1,
@@ -84,17 +88,7 @@ export default function RoomScreeen() {
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <ScrollView style={{ marginTop: 15 }}>
-          <View style={styles.logo}>
-            <Image
-              source={logo}
-              style={{
-                width: 40,
-                height: 40,
-              }}
-            />
-          </View>
-
+        <ScrollView>
           <View>
             {/* test carroussel */}
             {/* <ScrollView style={{ height: 300 }}>
@@ -211,19 +205,15 @@ export default function RoomScreeen() {
               }}
               showsUserLocation={true}
             >
-              {markers.map((marker) => {
-                return (
-                  <Marker
-                    key={marker.id}
-                    coordinate={{
-                      latitude: marker.latitude,
-                      longitude: marker.longitude,
-                    }}
-                    title={marker.title}
-                    description={marker.description}
-                  />
-                );
-              })}
+              <Marker
+                key={Data.id}
+                coordinate={{
+                  latitude: Data.location[1],
+                  longitude: Data.location[0],
+                }}
+                title={Data.title}
+                description={Data.description}
+              />
             </MapView>
           </View>
 
