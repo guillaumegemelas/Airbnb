@@ -99,18 +99,17 @@ export default function RoomScreeen() {
             {/* test carroussel */}
             <ScrollView>
               <Swiper
-                style={{ height: 300, backgroundColor: "red" }}
+                style={{ height: 300 }}
                 dotColor="salmon"
                 activeDotColor="red"
-                autoplay
               >
-                {Data.photos.map((pict) => {
+                {Data.photos.map((pict, index) => {
                   return (
-                    <View style={{ height: 300 }}>
+                    <View key={index} style={{ height: 300 }}>
                       <Image
                         style={{
-                          width: "100%",
-                          height: "100%",
+                          width: 550,
+                          height: 300,
                         }}
                         source={{ uri: pict.url }}
                       />
@@ -121,14 +120,6 @@ export default function RoomScreeen() {
             </ScrollView>
 
             {/* fin test carroussel */}
-            {/* <Image
-              style={{
-                width: "100%",
-                height: 300,
-                marginBottom: 20,
-              }}
-              source={{ uri: Data.photos[0].url }}
-            /> */}
 
             <Text
               style={{
