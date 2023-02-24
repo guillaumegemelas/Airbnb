@@ -148,12 +148,12 @@ export default function App() {
                     <Stack.Navigator>
                       <Stack.Screen
                         name="AroundmeScreen"
+                        component={AroundmeScreen}
                         options={{
                           title: "Around me",
                         }}
-                      >
-                        {() => <AroundmeScreen />}
-                      </Stack.Screen>
+                      />
+                      <Stack.Screen name="Room" component={RoomScreen} />
                     </Stack.Navigator>
                   )}
                 </Tab.Screen>

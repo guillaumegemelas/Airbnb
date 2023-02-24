@@ -15,12 +15,15 @@ export default function AroundmeScreen() {
 
   const navigation = useNavigation();
 
+  //on peut faire un seul useEffect() qui regroupe la demande de localisation et la requete axios
+
   //useEffect requete  axios--------------------------------------
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms/around"
+          //on devrait utiliser les query pour que l'ecran se centre autours de nous lors de la requete
         );
         console.log(response.data, "---------AROUNDME--OK--------------------");
         setData(response.data);
@@ -76,8 +79,8 @@ export default function AroundmeScreen() {
               initialRegion={{
                 latitude: latitude,
                 longitude: longitude,
-                latitudeDelta: 0.06,
-                longitudeDelta: 0.06,
+                latitudeDelta: 0.1,
+                longitudeDelta: 0.1,
               }}
             >
               {Data.map((marker, index) => {
