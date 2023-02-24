@@ -13,17 +13,15 @@ import { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 
 export default function SettingsScreen({ setToken, setId }) {
-  // const route = useRoute();
-
+  //data à stocker lors de la requete axios
+  const [Data, setData] = useState("");
   //création de states pour les éléments à afficher:
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [description, setDescription] = useState("");
+  const [email, setEmail] = useState(Data.email);
+  console.log(Data.email, "log email***********************");
+  const [username, setUsername] = useState(Data.username);
+  const [description, setDescription] = useState(Data.description);
 
   // const [isLoading, setIsloading] = useState(true);
-
-  //data à stocker lors de la requete axios
-  const [Data, setData] = useState();
 
   useEffect(() => {
     const handleProfil = async () => {
@@ -35,7 +33,7 @@ export default function SettingsScreen({ setToken, setId }) {
       console.log(token, "--------profile token------------");
       //
       const query = {
-        headers: { Authorization: `Bearer Token ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       };
 
       try {
@@ -47,7 +45,7 @@ export default function SettingsScreen({ setToken, setId }) {
         console.log(response.data, "---------Profile--ok------");
         setIsloading(false);
       } catch (error) {
-        console.log(error.response, "*********Profile**error****");
+        // console.log(error.response, "*********Profile**error****");
       }
     };
     handleProfil();
@@ -73,21 +71,20 @@ export default function SettingsScreen({ setToken, setId }) {
           value={email}
           style={styles.formtxt}
           placeholder="email"
-          // onChangeText={(input) => {
-          //   setEmail(input);
-          // console.log(input);
-          // }}
+          onChangeText={(input) => {
+            setEmail(input);
+            console.log(input);
+          }}
         />
 
         <TextInput
           value={username}
-          // theme={{ colors: { onSurfaceVariant: "yellow" } }}
           style={styles.formtxt}
           placeholder="username"
-          // onChangeText={(input) => {
-          //   setUsername(input);
-          // console.log(input);
-          // }}
+          onChangeText={(input) => {
+            setUsername(input);
+            console.log(input);
+          }}
         />
 
         <TextInput
@@ -96,10 +93,10 @@ export default function SettingsScreen({ setToken, setId }) {
           multiline={true}
           numberOfLines={4}
           placeholder="Describes yourself in a few words..."
-          // onChangeText={(input) => {
-          //   setDescription(input);
-          // console.log(input);
-          // }}
+          onChangeText={(input) => {
+            setDescription(input);
+            console.log(input);
+          }}
         />
       </View>
 
@@ -121,6 +118,7 @@ export default function SettingsScreen({ setToken, setId }) {
           title="Log Out"
           onPress={() => {
             setToken(null);
+            setId("");
           }}
         >
           <Text style={{ fontSize: 17, color: "#717171", fontWeight: "bold" }}>
