@@ -29,7 +29,7 @@ export default function HomeScreen() {
         const response = await axios.get(
           "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms"
         );
-        console.log(response.data, "---------HOME--OK--------------------");
+        // console.log(response.data, "---------HOME--OK--------------------");
         setData(response.data);
         setIsloading(false);
       } catch (error) {

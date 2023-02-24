@@ -34,6 +34,13 @@ export default function App() {
     setUserToken(token);
   };
 
+  //
+  const setId = async (id) => {
+    await AsyncStorage.setItem("userId", id);
+  };
+
+  //
+
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
@@ -62,10 +69,10 @@ export default function App() {
           // No token found, user isn't signed in
           <>
             <Stack.Screen name="SignIn">
-              {() => <SignInScreen setToken={setToken} />}
+              {() => <SignInScreen setToken={setToken} setId={setId} />}
             </Stack.Screen>
             <Stack.Screen name="SignUp">
-              {() => <SignUpScreen setToken={setToken} />}
+              {() => <SignUpScreen setToken={setToken} setId={setId} />}
             </Stack.Screen>
           </>
         ) : (
@@ -180,7 +187,9 @@ export default function App() {
                           title: "Settings",
                         }}
                       >
-                        {() => <SettingsScreen setToken={setToken} />}
+                        {() => (
+                          <SettingsScreen setToken={setToken} setId={setId} />
+                        )}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}

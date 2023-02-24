@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import logo from "../assets/logo.png";
 
-export default function SignInScreen({ setToken }) {
+export default function SignInScreen({ setToken, setId }) {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState("");
@@ -34,9 +34,12 @@ export default function SignInScreen({ setToken }) {
       //si retour API avec token, on stock le token
       if (response.data.token) {
         setToken(response.data.token);
+        setId(response.data.id);
 
         //affiche le token en chaine de caractères
         console.log(response.data.token, "+++++++++++signin+ok+++++++++++++");
+        //affiche l'id en chaine de caractères
+        console.log(response.data.id, "+++++++++++signin+ok+++++++++++++");
         alert("Connection réussie");
       }
       //sinon nav vers page SignUp

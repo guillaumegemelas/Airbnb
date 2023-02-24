@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
 
-export default function SettingsScreen({ setToken }) {
+export default function SettingsScreen({ setToken, setId }) {
   // const route = useRoute();
 
   //création de states pour les éléments à afficher:
@@ -28,9 +28,10 @@ export default function SettingsScreen({ setToken }) {
   useEffect(() => {
     const handleProfil = async () => {
       //pas sure de la recuperation de l'id: est il vraiement stocké?
-      const id = await AsyncStorage.getItem("id");
+      const id = await AsyncStorage.getItem("userId");
+      console.log(id, "--------profile id------------"); // revoie null
       const token = await AsyncStorage.getItem("userToken");
-      console.log(token);
+      console.log(token, "--------profile token------------");
 
       try {
         const response = await axios.get(

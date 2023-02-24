@@ -13,7 +13,7 @@ import axios from "axios";
 import { useState } from "react";
 import logo from "../assets/logo.png";
 
-export default function SignUpScreen({ setToken }) {
+export default function SignUpScreen({ setToken, setId }) {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -54,6 +54,7 @@ export default function SignUpScreen({ setToken }) {
       //si retour API avec token, on stocke token
       if (response.data) {
         setToken(response.data.token);
+        setId(response.data.id);
         alert("Cotre compte a bien été créé");
       }
 
