@@ -20,7 +20,7 @@ export default function SettingsScreen({ setToken, setId }) {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
 
-  const [isLoading, setIsloading] = useState(true);
+  // const [isLoading, setIsloading] = useState(true);
 
   //data à stocker lors de la requete axios
   const [Data, setData] = useState();
@@ -29,19 +29,25 @@ export default function SettingsScreen({ setToken, setId }) {
     const handleProfil = async () => {
       //pas sure de la recuperation de l'id: est il vraiement stocké?
       const id = await AsyncStorage.getItem("userId");
-      console.log(id, "--------profile id------------"); // revoie null
+      console.log(id, "--------profile id------------");
+      //
       const token = await AsyncStorage.getItem("userToken");
       console.log(token, "--------profile token------------");
+      //
+      const query = {
+        headers: { Authorization: `Bearer Token ${token}` },
+      };
 
       try {
         const response = await axios.get(
-          `https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/user/${id}`
+          `https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/user/${id}`,
+          query
         );
         setData(response.data);
         console.log(response.data, "---------Profile--ok------");
         setIsloading(false);
       } catch (error) {
-        console.log(error.response.data, "*********Profile**error****");
+        console.log(error.response, "*********Profile**error****");
       }
     };
     handleProfil();
